@@ -1,0 +1,171 @@
+LeetCode Logo
+Problem List
+Debugging...
+Debugging...
+
+
+
+
+
+
+
+
+
+
+0
+
+avatar
+Avatar
+subha_suprava_rout12
+Access all features with our Premium subscription!
+myLists
+My Lists
+notebook
+Notebook
+progress
+Progress
+points
+Points
+Try New Features
+Orders
+My Playgrounds
+Settings
+Appearance
+Sign Out
+Premium
+Description
+Description
+Accepted
+Editorial
+Editorial
+Solutions
+Solutions
+Submissions
+Submissions
+Code
+
+
+Testcase
+Testcase
+Test Result
+Python
+Auto
+
+
+
+
+
+            dfs(r, c - 1)
+
+        # Mark boundary-connected O's
+        for r in range(rows):
+            dfs(r, 0)
+            dfs(r, cols - 1)
+
+        for c in range(cols):
+            dfs(0, c)
+            dfs(rows - 1, c)
+
+        # Flip surrounded O's and restore safe O's
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == '#':
+                    board[r][c] = 'O'
+2526272829303132333435363738394041424344
+Saved
+Accepted
+Runtime: 0 ms
+Case 1
+Case 2
+Input
+board =
+[["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]
+Output
+[["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]]
+Expected
+[["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]]
+Contribute a testcase
+All Submissions
+
+Accepted
+59 / 59 testcases passed
+subha_suprava_rout12
+subha_suprava_rout12
+submitted at Sep 15, 2026 18:47
+
+
+1024
+👑 Unlock the Full LeetCode Experience
+Company problems, Ask Leet, and expert editorials — all in one plan.
+Runtime
+11
+ms
+Beats
+36.36%
+Memory
+16.99
+MB
+Beats
+30.43%
+Code
+Python
+class Solution(object):
+
+    def solve(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: None Do not return anything, modify board in-place instead.
+        """
+
+        if not board or not board[0]:
+            return
+
+        rows = len(board)
+        cols = len(board[0])
+
+        def dfs(r, c):
+            if r < 0 or r >= rows or c < 0 or c >= cols:
+                return
+
+            if board[r][c] != 'O':
+                return
+
+            board[r][c] = '#'
+
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+
+        # Mark boundary-connected O's
+        for r in range(rows):
+            dfs(r, 0)
+            dfs(r, cols - 1)
+
+        for c in range(cols):
+            dfs(0, c)
+            dfs(rows - 1, c)
+
+        # Flip surrounded O's and restore safe O's
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == '#':
+                    board[r][c] = 'O'
+View more
+ 
+More challenges
+200. Number of Islands
+286. Walls and Gates
+
+Write your notes here
+
+Select related tags
+0/5
+Surrounded Regions - LeetCode
+Search questions
+
+
