@@ -1,0 +1,46 @@
+class Solution(object):
+
+    def findLadders(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: List[List[str]]
+        """
+        wordSet = set(wordList)
+
+        if endWord not in wordSet:
+            return []
+
+        if beginWord == endWord:
+            return [[beginWord]]
+
+        layer = {beginWord: [[beginWord]]}
+        wordSet.discard(beginWord)
+
+        while layer:
+            next_layer = {}
+            found = False
+
+            for word in layer:
+                for i in range(len(word)):
+                    for c in 'abcdefghijklmnopqrstuvwxyz':
+                        new_word = word[:i] + c + word[i + 1:]
+
+                        if new_word in wordSet:
+                            found = found or new_word == endWord
+
+                            if new_word not in next_layer:
+                                next_layer[new_word] = []
+
+                            for path in layer[word]:
+                                next_layer[new_word].append(path + [new_word])
+
+            wordSet -= set(next_layer.keys())
+
+            if found:
+                return next_layer.get(endWord, [])
+
+            layer = next_layer
+
+        return []
